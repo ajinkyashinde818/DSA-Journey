@@ -1,3 +1,15 @@
+//🧠 Day 21 Problem: Find the Middle Element of a Singly Linked List
+
+// Given:
+
+// 10 → 20 → 30 → 40 → 50 → NULL
+
+// Find the middle element.
+
+// Expected output
+// Middle Element = 30
+
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -9,7 +21,7 @@ struct Node{
 void display(struct Node *ptr){
     while (ptr!=NULL)
     {
-        printf("The Original Elements is: %d\n",ptr->data);
+        printf("The Elements is: %d\n",ptr->data);
         ptr=ptr->next;
     }
     
@@ -22,38 +34,41 @@ int main(){
     struct Node * fourth=(struct Node*)malloc(sizeof(struct Node));
     struct Node * fifth=(struct Node*)malloc(sizeof(struct Node));
 
-    head->data=9;
+    head->data=10;
     head->next=second;
 
-    second->data=12;
+    second->data=20;
     second->next=third;
 
-    third->data=4;
+    third->data=30;
     third->next=fourth;
 
-    fourth->data=30;
+    fourth->data=40;
     fourth->next=fifth;
 
-    fifth->data=20;
+    fifth->data=50;
     fifth->next=NULL;
 
+    
     display(head);
 
-    struct Node * previous=NULL;
-    struct Node * current=head;
-    struct Node * next;
-
-    while (current!=NULL)
-    {
-        next=current->next;
-        current->next=previous;
-        previous=current;
-        current=next;
+    struct Node *temp=head;
+    int count=0;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
     }
-    head = previous;
-    printf("After Reversing The Elements:\n");
-    display(head);
-
+    
+    int num=count/2;
+    temp=head;
+    int position=0;
+    while (position<num)
+    {
+       temp=temp->next;
+       position++;
+    }
+    
+    printf("The Middle Element is:%d\n",temp->data);
 
     return 0;
 }
